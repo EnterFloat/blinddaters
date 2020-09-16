@@ -72,7 +72,8 @@ module.exports = {
     modules: [
       path.resolve('./node_modules'),
       path.resolve(path.join(__dirname, 'src/')),
-    ]
+    ],
+    extensions: ['*', '.js', '.vue', '.json']
   },
 
   optimization: {
@@ -93,6 +94,20 @@ module.exports = {
 
   module: {
     rules: [
+      {
+        test: /.(gif|png|jpe?g|webp|svg)$/i,
+        use: [
+           'file-loader',
+          {
+            loader: 'image-webpack-loader',
+            options: {
+              webp: {
+                quality: 80
+              }
+            }
+          }
+        ]
+      },
       {
         test: /\.vue$/,
         loader: 'vue-loader'
